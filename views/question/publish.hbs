@@ -1,0 +1,19 @@
+<h1 class="display-4">Dodaj oglas</h1>
+<form action="/questions" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="title">Predmet:</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Vnesite ime predmeta" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Opis:</label>
+        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Vnesite opis" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="tags">Oznaka:</label>
+        <input type="text" class="form-control" id="tags" name="tags" placeholder="Vnesite oznako" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Dodaj">
+    </div>
+</form>

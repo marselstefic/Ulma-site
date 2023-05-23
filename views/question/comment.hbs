@@ -1,0 +1,93 @@
+<h2>Oglasi:</h2>
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">{{data.post.title}}</h3>
+        <p class="card-text"><b>Opis:</b> {{data.post.description}}</p>
+        <p class="card-text"><b>Oznake:</b> {{data.post.tags}}</p>
+        <p class="card-text"><b>Datum objave:</b> {{data.post.date}}</p>
+        <p class="card-text"><b>Objavil:</b> <span>{{data.post.postedBy.username}}</span></p>
+        <hr>
+        {{#if session.userId}}
+            <h4 class="mt-4">Dodaj mnenje</h4>
+            <form>
+                <input type="hidden" id="id" name="id" value="{{data.post._id}}">
+                <div class="form-group">
+                    <label for="content">Mnjenje</label>
+                    <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="poslji()">Objavi mnjenje</button>
+            </form>
+        {{/if}}
+    </div>
+</div>
+
+<br>
+
+<div class="card">
+    <div class="card-body">
+        <h3>Mnenja:</h3>
+        {{#each data.comment}}
+            <div class="card mt-4">
+                <div class="card-body">
+                    <p class="card-text"><b>Vsebina:</b> {{content}}</p>
+                    <p class="card-text"><b>Objavil:</b> <span>{{postedBy.username}}</span></p>
+                    <!--<p class="card-text"><b>Selected:</b> <span>{{selected}}</span></p>-->
+                    <p class="card-text"><b>Čas objave:</b> {{date}}</p>
+                    <!--<button type="button" class="btn btn-success" id="select" onclick="sprejmi(this)" value="{{_id}}">Sprejmi komentar</button>-->
+                    <button type="button" class="btn btn-danger ml-2" onclick="zbrisiKomentar('{{_id}}')">Izbriši</button>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    function poslji() {
+        const getId = document.getElementById('id').value;
+        const getComment = document.getElementById('content').value;
+
+        const myData = {
+          content: getComment,
+          id: getId,
+        };
+        fetch('/comments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(myData)
+        }).then(location.reload());
+    }
+
+
+    function sprejmi(v) {
+        var tmp = v.value;
+        const myData = {
+            id: tmp,
+        };
+        fetch('/comments/select', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(myData)
+        }).then(location.reload());
+    }
+
+
+
+    function zbrisiKomentar(id) {
+
+        const data = {
+            id: id,
+        };
+
+        fetch("/comments/delete/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        }).then(location.reload());
+    }
+</script>

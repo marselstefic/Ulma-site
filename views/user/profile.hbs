@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="mb-4">Profil uporabnika</h1>
+            <p><b>Ime:</b> {{username}}</p>
+            <p><b>Mail:</b> {{email}}</p>
+            {{#if profileImage}}
+                <img id="profileImage" class="standard" src="{{profileImage}}" alt="Profile Image">
+                <form action="/users/profile" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="profileImage">Spremeni profilno sliko:</label>
+                        <input type="file" class="form-control-file" id="profileImage" name="profileImage">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Spremeni sliko</button>
+                </form>
+
+
+            {{else}}
+                <p>No profile image uploaded.</p>
+            {{/if}}
+
+
+            <br>
+            <a class="btn btn-danger" href="/users/logout">Odjava</a>
+        </div>
+    </div>
+</div>
+<style>
+    .standard {
+        width: 100px; /* Adjust these values to your preferred size */
+        height: 100px;
+    }
+
+    .enlarged {
+        width: 400px; /* Adjust these values to your preferred size */
+        height: 400px;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#profileImage").click(function(){
+            if ($(this).hasClass('standard')) {
+                $(this).removeClass('standard').addClass('enlarged');
+            } else {
+                $(this).removeClass('enlarged').addClass('standard');
+            }
+        });
+    });
+</script>
+
+

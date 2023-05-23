@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Registracija</h1>
+    <form action="/users" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Vnesite e-poštni naslov" required>
+        </div>
+        <div class="form-group">
+            <label for="username">Uporabniško ime:</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Vnesite uporabniško ime" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Geslo:</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Vnesite geslo" required>
+        </div>
+        <div class="form-group">
+            <label for="profileImage">Profilna slika:</label>
+            <input type="file" class="form-control-file" id="profileImage" name="profileImage">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Registracija</button>
+    </form>
+</div>

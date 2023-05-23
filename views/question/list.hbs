@@ -1,0 +1,38 @@
+<h1 class="mb-4">Oglasi:</h1>
+
+{{#each questions}}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Ime predmeta: {{title}}</h5>
+            <p class="card-text"><b>Opis:</b> {{description}}</p>
+            <p class="card-text"><b>Oznake:</b> {{tags}}</p>
+            <p class="card-text"><b>Datum objave:</b> {{date}}</p>
+            <b>Objavil:</b> <a href="/users/{{postedBy._id}}">{{postedBy.username}}</a>
+
+        </div>
+
+        <div class="card-footer">
+            <button class="btn btn-primary mr-2"><a href='/questions/{{_id}}' class="text-white">Odpri mnenje</a></button>
+            <!--<button class="btn btn-danger" onclick="zbrisiVprasanje('{{_id}}')">Izbriši</button>-->
+
+        </div>
+
+    </div>
+{{/each}}
+
+<script>
+    function zbrisiVprasanje(id) {
+
+        const data = {
+            id: id,
+        };
+
+        fetch("/questions/delete/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        }).then(location.reload());
+    }
+</script>
