@@ -15,7 +15,6 @@ router.get('/:id', userController.showProfile);
 router.post('/:id/rate', userController.rateUser);
 
 
-
 router.post('/', upload.single('profileImage'), userController.create); // add the multer middleware
 router.post('/login', userController.login);
 router.post('/profile', upload.single('profileImage'), userController.uploadImage);

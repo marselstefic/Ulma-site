@@ -9,6 +9,7 @@ var commentSchema = new Schema({
     },
     'parentPost' : String,
     'selected' : Boolean,
+    'ocena' : Number,
     'date' : Date
 });
 

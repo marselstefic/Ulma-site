@@ -56,6 +56,7 @@ module.exports = {
             postedBy : req.session.userId,
             parentPost : req.body.id,
             selected : false,
+            ocena: req.body.ocena,
             date : new Date()
         });
 

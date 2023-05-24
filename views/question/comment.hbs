@@ -10,6 +10,16 @@
         {{#if session.userId}}
             <h4 class="mt-4">Dodaj mnenje</h4>
             <form>
+                <input type="range" id="ocena" name="ocena" min="0" max="5" value="3" step="0.5">
+                <p>Ocena: <output id="value"></output></p>
+                <script type="text/javascript">
+                    const value = document.querySelector("#value")
+                    const input = document.querySelector("#ocena")
+                    value.textContent = input.value
+                    input.addEventListener("input", (event) => {
+                        value.textContent = event.target.value
+                    })
+                </script>
                 <input type="hidden" id="id" name="id" value="{{data.post._id}}">
                 <div class="form-group">
                     <label for="content">Mnjenje</label>
@@ -29,6 +39,7 @@
         {{#each data.comment}}
             <div class="card mt-4">
                 <div class="card-body">
+                    <p class="card-text"><b>Ocena:</b> {{ocena}}</p>
                     <p class="card-text"><b>Vsebina:</b> {{content}}</p>
                     <p class="card-text"><b>Objavil:</b> <span>{{postedBy.username}}</span></p>
                     <!--<p class="card-text"><b>Selected:</b> <span>{{selected}}</span></p>-->
@@ -45,10 +56,12 @@
     function poslji() {
         const getId = document.getElementById('id').value;
         const getComment = document.getElementById('content').value;
+        const value = document.getElementById("value").value;
 
         const myData = {
           content: getComment,
           id: getId,
+          ocena: value
         };
         fetch('/comments', {
             method: 'POST',
